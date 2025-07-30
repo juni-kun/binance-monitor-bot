@@ -1,0 +1,6 @@
+📝 Catatan:
+Nama spreadsheet yang dicari: Binance Monitor (bisa kamu ganti di client.open(...))
+
+Sheet yang digunakan: sheet1
+
+Kolom yang dicatat: waktu, symbol, side, price, qty, quote_qty, komisi, asset, pnl, saldo
