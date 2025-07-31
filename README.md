@@ -32,7 +32,7 @@ pip install python-telegram-bot requests python-dotenv gspread oauth2client
 
 ### 3. Jalankan bot
 ```
-python monitor_binance.py
+python binance.py
 
 ```
 
