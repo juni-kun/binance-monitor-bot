@@ -1,11 +1,18 @@
-# Binance Futures Monitor Bot
-
-Bot Python ini memantau transaksi terakhir dari akun Binance Futures dan mengirimkan notifikasi detail ke channel Telegram.
+# 📊 Binance Margin Trade Monitor Bot
+Bot ini digunakan untuk memantau aktivitas trading Margin (termasuk Portfolio Margin) di Binance, mengirimkan notifikasi ke Telegram secara real-time saat ada trade baru, dan mencatat data tersebut ke Google Spreadsheet..
 
 ## 📦 Fitur
-- Deteksi trade baru (BUY/SELL)
-- Menampilkan status PROFIT / LOSS
-- Informasi: leverage, margin, entry price, PnL, dan balance setelah trade
+- Mendeteksi secara otomatis jenis akun: Portfolio Margin atau Cross Margin Biasa
+- Mengambil data transaksi terakhir dari semua aset aktif (yang memiliki saldo/borrow)
+- Mengirimkan notifikasi Telegram yang dilengkapi dengan:
+- Simbol
+- Arah trade (BUY / SELL)
+- Profit / Loss
+- Waktu transaksi
+- Ukuran dan harga
+- Komisi dan PNL
+- Total wallet balance saat ini
+- Menyimpan log ke Google Spreadsheet secara otomatis
 
 ## 🚀 Cara Penggunaan
 
@@ -19,12 +26,14 @@ TELEGRAM_BOT_TOKEN=xxx
 
 ### 2. Install dependencies
 ```
-pip install requests python-dotenv python-telegram-bot
+pip install python-telegram-bot requests python-dotenv gspread oauth2client
+
 ```
 
 ### 3. Jalankan bot
 ```
-python binance.py
+python monitor_binance.py
+
 ```
 
 ## 📸 Contoh Output Telegram
@@ -41,7 +50,15 @@ PNL: 4.52 USDT
 💰 Wallet Sekarang: 203.89 USDT
 ```
 
-## 📝 Catatan
-- Gunakan akun sub-account ketika testing
-- Simpan `last_trade_id` agar tidak hilang saat restart (opsional)
-- Tambahkan logging jika ingin analisis performa
+## 🧩 Catatan
+Jika terjadi kesalahan saat mengambil data dari API, pesan error akan dikirim ke Telegram.
+Trade terakhir disimpan dengan last_trade_id sehingga trade yang sama tidak dikirim berulang.
+Loop utama memiliki delay 15 detik per siklus
+
+## 💡 Tips Tambahan
+Ubah CHAT_ID menjadi ID atau username Telegram channel kamu (dengan awalan @).
+
+Gunakan layanan seperti PM2 atau supervisord untuk menjalankan bot ini secara terus-menerus.
+
+## 📬 Lisensi
+Skrip ini bebas digunakan dan dimodifikasi untuk keperluan pribadi. Dilarang diperjualbelikan tanpa izin.
